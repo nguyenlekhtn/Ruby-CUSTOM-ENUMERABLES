@@ -36,3 +36,5 @@ def multiply_els(arr)
 end
 
 p multiply_els([2,4,5])
+p [1, 2, 3].my_inject(4) { |a, v| a * v}
+

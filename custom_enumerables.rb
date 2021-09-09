@@ -66,11 +66,16 @@ module Enumerable
     arr
   end
 
-  def my_inject
-    return to_enum(:my_inject) unless block_given?
+  def my_inject(initial = nil)
+    return to_enum(:my_inject, initial) unless block_given?
 
-    memo = self[0]
-    self[1..].my_each { |item| memo = yield(memo, item) }
+    if initial.nil?
+      memo = self[0]
+      self[1..].my_each { |item| memo = yield(memo, item) }
+    else
+      memo = initial
+      my_each { |item| memo = yield(memo, item) }
+    end
     memo
   end
 end
